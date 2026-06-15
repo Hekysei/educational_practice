@@ -7,9 +7,6 @@ int main() {
   std::cin >> n;
 
   std::vector<std::vector<int32_t>> triangle(n);
-  std::vector<std::vector<int32_t>> dp(n);
-  std::vector<std::vector<int32_t>> child_mat(n - 1,
-                                              std::vector<int32_t>(n - 1));
 
   for (int32_t i = 0; i < n; ++i) {
     triangle[i].resize(i + 1);
@@ -18,7 +15,9 @@ int main() {
     }
   }
 
-  dp = triangle;
+  std::vector<std::vector<int32_t>> dp = triangle;
+  std::vector<std::vector<int32_t>> child_mat(n - 1,
+                                              std::vector<int32_t>(n - 1));
 
   for (int32_t i = n - 2; i >= 0; --i) {
     for (int j = 0; j <= i; ++j) {
@@ -32,13 +31,15 @@ int main() {
     }
   }
 
-  for (int32_t i = 0; i < n; ++i) {
-    for (int32_t j = 0; j <= i; ++j) {
-      std::cout << dp[i][j] << " ";
-    }
-    std::cout << "\n";
-  }
+  std::cout << dp[0][0] << std::endl;
 
+  int32_t col = 0;
+  std::cout << triangle[0][0];
+  for (int32_t i = 1; i < n; ++i) {
+    col = child_mat[i - 1][col];
+    std::cout << " " << triangle[i][col];
+  }
   std::cout << std::endl;
+
   return 0;
 }
