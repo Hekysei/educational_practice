@@ -16,8 +16,7 @@ int main() {
   }
 
   std::vector<std::vector<int32_t>> dp = triangle;
-  std::vector<std::vector<int32_t>> child_mat(n - 1,
-                                              std::vector<int32_t>(n - 1));
+  std::vector<std::vector<int32_t>> child_mat(n - 1, std::vector<int32_t>(n - 1));
 
   for (int32_t i = n - 2; i >= 0; --i) {
     for (int j = 0; j <= i; ++j) {
