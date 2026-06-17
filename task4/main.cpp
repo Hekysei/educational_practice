@@ -20,6 +20,7 @@ int main() {
 
   std::cin >> s_final;
 
+
   for (int64_t i = 0; i < n; ++i) {
     if (!visited[i]) {
       std::vector<int64_t> cycle;
@@ -31,12 +32,16 @@ int main() {
         curr = p[curr];
       }
 
-      for (auto el : cycle) {
-        std::cout << el << " ";
+      int64_t len = static_cast<int64_t>(cycle.size());
+
+      for (int64_t m = 0; m < len; ++m) {
+        int64_t target_idx = cycle[(m + k) % len];
+        s_init[target_idx] = s_final[cycle[m]];
       }
-      std::cout << "\n";
     }
   }
+
+  std::cout << s_init << std::endl;
 
   return 0;
 }
