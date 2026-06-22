@@ -9,10 +9,10 @@ green_mask = cv2.inRange(hsv_image, (36, 25, 25), (70, 255, 255))
 contours, _ = cv2.findContours(green_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
 for contour in contours:
-    for dot in contour:
-        print(dot)
-        cv2.circle(image, dot[0], 7, (0, 0, 255), -1)
+    x, y, w, h = cv2.boundingRect(contour)
+    pos = (x + w // 2, y + h // 2)
+    cv2.circle(image, pos, 7, (0, 0, 255), -1)
 
-cv2.imshow("res", image)
+cv2.imshow("Result", image)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
